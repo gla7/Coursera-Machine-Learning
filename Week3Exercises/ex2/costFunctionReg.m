@@ -18,7 +18,11 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
-
+[costNotRegularized, gradNotRegularized] = costFunction(theta, X, y);
+thetaWithoutZeroethRow = theta(2:end,:);
+thetaWithZeroFirstRow = [0; thetaWithoutZeroethRow];
+J = costNotRegularized + (lambda / (2 * m)) * (thetaWithZeroFirstRow' * thetaWithZeroFirstRow);
+grad = gradNotRegularized + (lambda / m) * thetaWithZeroFirstRow;
 
 
 
