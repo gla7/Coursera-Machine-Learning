@@ -30,8 +30,10 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
+# X is m x (n +1) and all_theta is k x (n + 1) so X * all_theta' is m x k but we take
+# the max of each row so the following ends up as a m x 1 vector with each row being equal
+# to the index of the max value for the sigmoid, so this index is the 'number' predicted
+[maxValues, p] = max(sigmoid(X * all_theta'), [], 2);
 
 
 

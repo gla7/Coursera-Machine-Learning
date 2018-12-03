@@ -38,8 +38,17 @@ grad = zeros(size(theta));
 
 
 
+# all of the below follow pattern followed last exercise
+h = sigmoid(X * theta);
 
+costNotRegularized = (1 / m) * sum((-y .* log(h)) - ((1 - y) .* log(1 - h)));
+gradNotRegularized = (1 / m) * (X' * (h - y));
 
+thetaWithoutZeroethRow = theta(2:end,:);
+thetaWithZeroFirstRow = [0; thetaWithoutZeroethRow];
+
+J = costNotRegularized + (lambda / (2 * m)) * (thetaWithZeroFirstRow' * thetaWithZeroFirstRow);
+grad = gradNotRegularized + (lambda / m) * thetaWithZeroFirstRow;
 
 
 

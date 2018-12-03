@@ -21,8 +21,16 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-
-
+# add column of biases (x_0) to the features
+X = [ones(m, 1) X];
+# get z2i = theta_0 * x_0i + ... + theta_n * x_ni and then go sigmoid(zji)
+a2 = sigmoid(Theta1 * X');
+# add column of biases (x_0) to the activations of the hidden layer
+a2 = [ones(1, size(a2, 2)); a2];
+# obtain z3i following a similar procedura as above
+a3 = sigmoid(Theta2 * a2);
+# get max value for each row, in this case the index
+[maxValues, p] = max(a3', [], 2);
 
 
 
