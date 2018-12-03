@@ -49,7 +49,18 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
-
+for i = 1:num_labels,
+  # initializing theta
+  initial_theta = zeros(n + 1, 1);
+  # optimization algorithm options
+  options = optimset('GradObj', 'on', 'MaxIter', 50);
+  # training the model using optimization algorithm for a certain value of k
+  [theta] = ...
+    fmincg (@(t)(lrCostFunction(t, X, (y == i), lambda)), ...
+            initial_theta, options);
+  # assigning the weights for that k value          
+  all_theta(i, :) = theta';        
+end;
 
 
 
