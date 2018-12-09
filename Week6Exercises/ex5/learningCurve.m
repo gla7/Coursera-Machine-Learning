@@ -53,11 +53,21 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
-
-
-
-
-
+# we attempt a different numnber in the training set m, varying m = 1 to m = actual m
+for i = 1:m,
+  # grab the relevant number of training examples from the training superset
+  XTrain = X(1:i, :);
+  yTrain = y(1:i);
+  # train our model using regularization
+  theta = trainLinearReg(XTrain, yTrain, lambda);
+  # calculate the errors for each m using the trained theta but omit regularization for
+  # the training set and the validation set
+  [JTrain_i, gradTrain] = linearRegCostFunction(XTrain, yTrain, theta, 0);
+  [JVal_i, gradVal] = linearRegCostFunction(Xval, yval, theta, 0);
+  # assign these non-regularized error values to the return values
+  error_train(i) = JTrain_i;
+  error_val(i) = JVal_i;
+end;
 
 % -------------------------------------------------------------
 

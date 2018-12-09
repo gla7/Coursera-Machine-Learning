@@ -15,9 +15,13 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
-
-
-
+# set X_poly to X initially
+X_poly = X;
+for i = 2:p,
+  # on each iteration, add a column to X_poly, where the column added is 
+  # the first column exponentiated to the ith power (element-wise)
+  X_poly = [X_poly ((X_poly(:, 1)) .^ i)]
+end;
 
 
 % =========================================================================

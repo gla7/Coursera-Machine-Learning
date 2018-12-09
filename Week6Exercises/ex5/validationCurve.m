@@ -39,14 +39,18 @@ error_val = zeros(length(lambda_vec), 1);
 %
 %
 
-
-
-
-
-
-
-
-
+# we attempt to train the thetas using different levels of regularization to choose the best one
+for i = 1:size(lambda_vec, 1),
+  # train our model using the ith regularization parameter
+  theta = trainLinearReg(X, y, lambda_vec(i));
+  # calculate the errors for each m using the trained theta but omit regularization for
+  # the training set and the validation set
+  [JTrain_i, gradTrain] = linearRegCostFunction(X, y, theta, 0);
+  [JVal_i, gradVal] = linearRegCostFunction(Xval, yval, theta, 0);
+  # assign these non-regularized error values to the return values
+  error_train(i) = JTrain_i;
+  error_val(i) = JVal_i;
+end;
 
 % =========================================================================
 
