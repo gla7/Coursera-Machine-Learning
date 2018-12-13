@@ -16,7 +16,13 @@ sim = 0;
 %
 %
 
-
+# add bias term to the features
+x1 = [1; x1];
+x2 = [1; x2];
+# obtain argument for exponential in gaussian kernel function
+sumOfDifferences = ((x1 - x2)' * (x1 - x2)) / (2 * (sigma ^ 2));
+# gaussian kernel function is
+sim = exp(-sumOfDifferences);
 
 
 
