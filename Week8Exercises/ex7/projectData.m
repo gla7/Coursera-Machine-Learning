@@ -18,7 +18,10 @@ Z = zeros(size(X, 1), K);
 %                    projection_k = x' * U(:, k);
 %
 
-
+# select the K most relevant basis
+Ureduce = U(:, 1:K);
+# project features X to the new basis vectors
+Z = X * Ureduce;
 
 
 % =============================================================

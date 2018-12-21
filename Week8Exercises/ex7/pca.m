@@ -20,11 +20,11 @@ S = zeros(n);
 %       number of examples).
 %
 
-
-
-
-
-
+# find the covariance matrix
+Sigma = (1 / m) * (X' * X);
+# diagonalize the matrix using SVD and return the matrix whose columns are the transformed
+# basis U and the diagonal matrix of variances S
+[U, S, V] = svd(Sigma);
 
 % =========================================================================
 

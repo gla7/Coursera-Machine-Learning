@@ -26,12 +26,25 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
-
-
+# for each centroid
+for i = 1:size(centroids, 1),
+  # make a row vector that will iteratively add the positions of the centroid's closest examples
+  sum = zeros(1, n);
+  # keep track of how many examples have this centroid as its closest for averaging at the end
+  count = 0;
+  # iterate over each selected centroid and add each corresponding row of X to the running sum
+  # and keep track of how many examples have this centroid as their closest
+  for j = 1:size(idx, 1),
+    if idx(j) == i,
+      sum = sum + X(j, :);
+      count = count + 1;
+    end;  
+  end;
+  # assign the average position to the centroid
+  if count ~= 0,
+    centroids(i, :) = sum ./ count;
+  end;  
+end;
 
 % =============================================================
 

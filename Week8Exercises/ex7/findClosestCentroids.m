@@ -21,10 +21,26 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
+# iterate over each example
+for i = 1:size(X, 1),
+  # for each example, set a high minimum distance to closest centroid and a zero index
+  # which does not exist in octave
+  min_distance = 9999999;
+  min_distance_index = 0;
+  # now iterate over the centroids
+  for j = 1:size(centroids, 1),
+    # calculate the squared distance between the given example and the centroid in question
+    distance = sum((X(i, :) - centroids(j, :)) .^ 2);
+    # if this distance is less than the current minimum distance for this example, record it
+    # as the minimum and its index
+    if min_distance > distance,
+      min_distance = distance;
+      min_distance_index = j;
+    end;
+  end;
+  # set the index of the centroid that is closest to the example
+  idx(i) = min_distance_index; 
+end;
 
 
 % =============================================================
